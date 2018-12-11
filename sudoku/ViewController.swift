@@ -22,15 +22,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sudokuGrid = SudokuGame.generateGame(difficulty: .easy)
-        update()
-
         sudokuGridView.onTap = { [weak self] pos in
             self?.pickerView.selectedNumber = self?.sudokuGrid.number(at: pos)
             self?.pickerView.onPick = { val in
-                let move: Move = val == nil ? .none : .player(val!)
-                self?.sudokuGrid.set(move: move, pos: pos)
-                self?.update()
+                guard let self = self else { return }
+                let move = Move(player: .user, val: val)
+                if self.sudokuGrid.isLegal(move: move, at: pos) {
+                    self.sudokuGrid.set(move: move, pos: pos)
+                }
+                self.update()
             }
         }
 
@@ -41,7 +41,8 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        sudokuGridView.sudokuGrid = SudokuGrid()
+        sudokuGrid = SudokuGame.generateGame(difficulty: .easy)
+        update()
     }
 
     override func viewWillLayoutSubviews() {

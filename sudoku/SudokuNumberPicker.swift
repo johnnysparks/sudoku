@@ -21,7 +21,7 @@ class SudokuNumberPicker: UIPickerView {
 
     var selectedNumber: Int? {
         didSet {
-            guard let selectedNumber = selectedNumber, selectedNumber > 0, selectedNumber <= sudokuGrid?.size ?? 0 else {
+            guard let selectedNumber = selectedNumber, selectedNumber > 0 else {
                 selectRow(0, inComponent: 0, animated: true)
                 return
             }

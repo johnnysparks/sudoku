@@ -57,21 +57,34 @@ extension SudokuGridView: UICollectionViewDelegate {
 extension SudokuGridView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sudokuGrid.size * sudokuGrid.size
+        return sudokuGrid.size
+    }
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return sudokuGrid.size
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: "SudokuGridCell", for: indexPath) as! SudokuGridCell
-        switch sudokuGrid.move(at: indexPath.toPosition()) {
-        case .game(let val):
+        let pos = indexPath.toPosition()
+        let move = sudokuGrid.move(at: pos)
+
+        if let val = move.val {
             cell.label.text = "\(val)"
-            cell.label.textColor = .black
-        case .player(let val):
-            cell.label.text = "\(val)"
-            cell.label.textColor = .gray
-        case .none:
+        } else {
             cell.label.text = ""
         }
+
+        switch move.player {
+        case .game:
+            cell.label.textColor = .gray
+        case .user:
+            var other = sudokuGrid
+            other.set(move: .none, pos: pos)
+            cell.label.textColor = other.isSmart(move: move, at: pos) ? .black : .red
+        default: break
+        }
+
         return cell
     }
 }

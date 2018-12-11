@@ -67,15 +67,15 @@ class SudokuGridTests: XCTestCase {
     //MARK: - Number
     func testNumbersForRow() {
         var grid = SudokuGrid()
-        grid.set(move: .game(1), pos: Position(x: 3, y: 3))
-        grid.set(move: .game(2), pos: Position(x: 3, y: 4))
-        grid.set(move: .game(3), pos: Position(x: 3, y: 5))
-        grid.set(move: .game(4), pos: Position(x: 4, y: 3))
-        grid.set(move: .game(5), pos: Position(x: 4, y: 4))
-        grid.set(move: .game(6), pos: Position(x: 4, y: 5))
-        grid.set(move: .game(7), pos: Position(x: 5, y: 3))
-        grid.set(move: .game(8), pos: Position(x: 5, y: 4))
-        grid.set(move: .game(9), pos: Position(x: 5, y: 5))
+        grid.set(move: Move(player: .game, val: 1), pos: Position(x: 3, y: 3))
+        grid.set(move: Move(player: .game, val: 2), pos: Position(x: 3, y: 4))
+        grid.set(move: Move(player: .game, val: 3), pos: Position(x: 3, y: 5))
+        grid.set(move: Move(player: .game, val: 4), pos: Position(x: 4, y: 3))
+        grid.set(move: Move(player: .game, val: 5), pos: Position(x: 4, y: 4))
+        grid.set(move: Move(player: .game, val: 6), pos: Position(x: 4, y: 5))
+        grid.set(move: Move(player: .game, val: 7), pos: Position(x: 5, y: 3))
+        grid.set(move: Move(player: .game, val: 8), pos: Position(x: 5, y: 4))
+        grid.set(move: Move(player: .game, val: 9), pos: Position(x: 5, y: 5))
         var nums = grid.numbersFor(nth: 3, set: .row)
         XCTAssert(Set([1, 4, 7]).elementsEqual(nums))
 
@@ -88,15 +88,15 @@ class SudokuGridTests: XCTestCase {
 
     func testNumbersForColumn() {
         var grid = SudokuGrid()
-        grid.set(move: .game(1), pos: Position(x: 3, y: 3))
-        grid.set(move: .game(2), pos: Position(x: 3, y: 4))
-        grid.set(move: .game(3), pos: Position(x: 3, y: 5))
-        grid.set(move: .game(4), pos: Position(x: 4, y: 3))
-        grid.set(move: .game(5), pos: Position(x: 4, y: 4))
-        grid.set(move: .game(6), pos: Position(x: 4, y: 5))
-        grid.set(move: .game(7), pos: Position(x: 5, y: 3))
-        grid.set(move: .game(8), pos: Position(x: 5, y: 4))
-        grid.set(move: .game(9), pos: Position(x: 5, y: 5))
+        grid.set(move: Move(player: .game, val: 1), pos: Position(x: 3, y: 3))
+        grid.set(move: Move(player: .game, val: 2), pos: Position(x: 3, y: 4))
+        grid.set(move: Move(player: .game, val: 3), pos: Position(x: 3, y: 5))
+        grid.set(move: Move(player: .game, val: 4), pos: Position(x: 4, y: 3))
+        grid.set(move: Move(player: .game, val: 5), pos: Position(x: 4, y: 4))
+        grid.set(move: Move(player: .game, val: 6), pos: Position(x: 4, y: 5))
+        grid.set(move: Move(player: .game, val: 7), pos: Position(x: 5, y: 3))
+        grid.set(move: Move(player: .game, val: 8), pos: Position(x: 5, y: 4))
+        grid.set(move: Move(player: .game, val: 9), pos: Position(x: 5, y: 5))
 
         var nums = grid.numbersFor(nth: 3, set: .column)
         XCTAssert(Set([1, 2, 3]).elementsEqual(nums))
@@ -110,15 +110,15 @@ class SudokuGridTests: XCTestCase {
 
     func testNumbersForGrid() {
         var grid = SudokuGrid()
-        grid.set(move: .game(1), pos: Position(x: 3, y: 3))
-        grid.set(move: .game(2), pos: Position(x: 3, y: 4))
-        grid.set(move: .game(3), pos: Position(x: 3, y: 5))
-        grid.set(move: .game(4), pos: Position(x: 4, y: 3))
-        grid.set(move: .game(5), pos: Position(x: 4, y: 4))
-        grid.set(move: .game(6), pos: Position(x: 4, y: 5))
-        grid.set(move: .game(7), pos: Position(x: 5, y: 3))
-        grid.set(move: .game(8), pos: Position(x: 5, y: 4))
-        grid.set(move: .game(9), pos: Position(x: 5, y: 5))
+        grid.set(move: Move(player: .game, val: 1), pos: Position(x: 3, y: 3))
+        grid.set(move: Move(player: .game, val: 2), pos: Position(x: 3, y: 4))
+        grid.set(move: Move(player: .game, val: 3), pos: Position(x: 3, y: 5))
+        grid.set(move: Move(player: .game, val: 4), pos: Position(x: 4, y: 3))
+        grid.set(move: Move(player: .game, val: 5), pos: Position(x: 4, y: 4))
+        grid.set(move: Move(player: .game, val: 6), pos: Position(x: 4, y: 5))
+        grid.set(move: Move(player: .game, val: 7), pos: Position(x: 5, y: 3))
+        grid.set(move: Move(player: .game, val: 8), pos: Position(x: 5, y: 4))
+        grid.set(move: Move(player: .game, val: 9), pos: Position(x: 5, y: 5))
         XCTAssert(Set([]).elementsEqual(grid.numbersFor(nth: 3, set: .grid)))
 
         XCTAssert(Set([1, 2, 3, 4, 5, 6, 7, 8, 9]).elementsEqual(grid.numbersFor(nth: 4, set: .grid)))
@@ -142,83 +142,93 @@ class SudokuGridTests: XCTestCase {
     // MARK: - isSmart
     func testIsSmartRow() {
         var grid = SudokuGrid()
-        grid.set(move: .game(1), pos: Position(x: 5, y: 6))
-        grid.set(move: .game(2), pos: Position(x: 6, y: 6))
-        grid.set(move: .game(3), pos: Position(x: 7, y: 6))
+        grid.set(move: Move(player: .game, val: 1), pos: Position(x: 5, y: 6))
+        grid.set(move: Move(player: .game, val: 2), pos: Position(x: 6, y: 6))
+        grid.set(move: Move(player: .game, val: 3), pos: Position(x: 7, y: 6))
 
 
-        XCTAssertFalse(grid.isSmart(move: .player(1), forNth: 6, set: .row))
-        XCTAssertFalse(grid.isSmart(move: .player(2), forNth: 6, set: .row))
-        XCTAssertFalse(grid.isSmart(move: .player(3), forNth: 6, set: .row))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 1), forNth: 6, set: .row))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 2), forNth: 6, set: .row))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 3), forNth: 6, set: .row))
 
-        XCTAssert(grid.isSmart(move: .player(4), forNth: 6, set: .row))
-        XCTAssert(grid.isSmart(move: .player(5), forNth: 6, set: .row))
-        XCTAssert(grid.isSmart(move: .player(6), forNth: 6, set: .row))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 4), forNth: 6, set: .row))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 5), forNth: 6, set: .row))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 6), forNth: 6, set: .row))
     }
 
     // MARK: - isSmart
     func testIsSmartolumn() {
         var grid = SudokuGrid()
-        grid.set(move: .game(1), pos: Position(x: 5, y: 6))
-        grid.set(move: .game(2), pos: Position(x: 6, y: 6))
-        grid.set(move: .game(3), pos: Position(x: 7, y: 6))
+        grid.set(move: Move(player: .game, val: 1), pos: Position(x: 5, y: 6))
+        grid.set(move: Move(player: .game, val: 2), pos: Position(x: 6, y: 6))
+        grid.set(move: Move(player: .game, val: 3), pos: Position(x: 7, y: 6))
 
 
-        XCTAssertFalse(grid.isSmart(move: .player(1), forNth: 5, set: .column))
-        XCTAssertFalse(grid.isSmart(move: .player(2), forNth: 6, set: .column))
-        XCTAssertFalse(grid.isSmart(move: .player(3), forNth: 7, set: .column))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 1), forNth: 5, set: .column))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 2), forNth: 6, set: .column))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 3), forNth: 7, set: .column))
 
-        XCTAssert(grid.isSmart(move: .player(4), forNth: 5, set: .column))
-        XCTAssert(grid.isSmart(move: .player(5), forNth: 6, set: .column))
-        XCTAssert(grid.isSmart(move: .player(6), forNth: 7, set: .column))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 4), forNth: 5, set: .column))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 5), forNth: 6, set: .column))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 6), forNth: 7, set: .column))
+    }
+
+    func testIsSmartNone() {
+        var grid = SudokuGrid()
+        grid.set(move: Move(player: .game, val: 1), pos: Position(x: 1, y: 1))
+        XCTAssertFalse(grid.isLegal(move: .none, at: Position(x: 1, y: 1)))
+
+        grid = SudokuGrid()
+        grid.set(move: Move(player: .user, val: 1), pos: Position(x: 1, y: 1))
+        XCTAssert(grid.isLegal(move: .none, at: Position(x: 1, y: 1)))
     }
 
     func testIsSmartGrid() {
         var grid = SudokuGrid()
-        grid.set(move: .game(1), pos: Position(x: 3, y: 3))
-        grid.set(move: .game(2), pos: Position(x: 3, y: 4))
-        grid.set(move: .game(3), pos: Position(x: 3, y: 5))
-        grid.set(move: .game(4), pos: Position(x: 4, y: 3))
-        grid.set(move: .game(5), pos: Position(x: 4, y: 4))
-        grid.set(move: .game(6), pos: Position(x: 4, y: 5))
+        grid.set(move: Move(player: .game, val: 1), pos: Position(x: 3, y: 3))
+        grid.set(move: Move(player: .game, val: 2), pos: Position(x: 3, y: 4))
+        grid.set(move: Move(player: .game, val: 3), pos: Position(x: 3, y: 5))
+        grid.set(move: Move(player: .game, val: 4), pos: Position(x: 4, y: 3))
+        grid.set(move: Move(player: .game, val: 5), pos: Position(x: 4, y: 4))
+        grid.set(move: Move(player: .game, val: 6), pos: Position(x: 4, y: 5))
 
 
-        XCTAssertFalse(grid.isSmart(move: .player(1), forNth: 4, set: .grid))
-        XCTAssertFalse(grid.isSmart(move: .player(2), forNth: 4, set: .grid))
-        XCTAssertFalse(grid.isSmart(move: .player(3), forNth: 4, set: .grid))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 1), forNth: 4, set: .grid))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 2), forNth: 4, set: .grid))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 3), forNth: 4, set: .grid))
 
-        XCTAssert(grid.isSmart(move: .player(7), forNth: 4, set: .grid))
-        XCTAssert(grid.isSmart(move: .player(8), forNth: 4, set: .grid))
-        XCTAssert(grid.isSmart(move: .player(9), forNth: 4, set: .grid))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 7), forNth: 4, set: .grid))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 8), forNth: 4, set: .grid))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 9), forNth: 4, set: .grid))
 
-        XCTAssert(grid.isSmart(move: .player(1), forNth: 1, set: .grid))
-        XCTAssert(grid.isSmart(move: .player(2), forNth: 2, set: .grid))
-        XCTAssert(grid.isSmart(move: .player(3), forNth: 3, set: .grid))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 1), forNth: 1, set: .grid))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 2), forNth: 2, set: .grid))
+        XCTAssert(grid.isSetSafe(move: Move(player: .user, val: 3), forNth: 3, set: .grid))
     }
 
 
     // MARK: - isLegal
     func testIsValidAny() {
         var grid = SudokuGrid()
-        grid.set(move: .game(1), pos: Position(x: 3, y: 3))
-        grid.set(move: .game(2), pos: Position(x: 3, y: 4))
-        grid.set(move: .game(3), pos: Position(x: 3, y: 5))
-        grid.set(move: .game(4), pos: Position(x: 4, y: 3))
-        grid.set(move: .game(5), pos: Position(x: 4, y: 4))
-        grid.set(move: .game(6), pos: Position(x: 4, y: 5))
+        grid.set(move: Move(player: .game, val: 1), pos: Position(x: 3, y: 3))
+        grid.set(move: Move(player: .game, val: 2), pos: Position(x: 3, y: 4))
+        grid.set(move: Move(player: .game, val: 3), pos: Position(x: 3, y: 5))
+        grid.set(move: Move(player: .game, val: 4), pos: Position(x: 4, y: 3))
+        grid.set(move: Move(player: .game, val: 5), pos: Position(x: 4, y: 4))
+        grid.set(move: Move(player: .game, val: 6), pos: Position(x: 4, y: 5))
 
 
-        XCTAssertFalse(grid.isSmart(move: .player(1), forNth: 4, set: .grid))
-        XCTAssertFalse(grid.isSmart(move: .player(2), forNth: 4, set: .grid))
-        XCTAssertFalse(grid.isSmart(move: .player(3), forNth: 4, set: .grid))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 1), forNth: 4, set: .grid))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 2), forNth: 4, set: .grid))
+        XCTAssertFalse(grid.isSetSafe(move: Move(player: .user, val: 3), forNth: 4, set: .grid))
     }
 
     func testIsSmartExistingNumber() {
         var grid = SudokuGrid()
-        grid.set(move: .game(1), pos: Position(x: 0, y: 0))
+        grid.set(move: Move(player: .game, val: 1), pos: Position(x: 0, y: 0))
 
-        XCTAssertFalse(grid.isLegal(move: .game(1), at: Position(x: 0, y: 0)))
-        XCTAssertFalse(grid.isLegal(move: .game(2), at: Position(x: 0, y: 0)))
-        XCTAssertFalse(grid.isLegal(move: .game(9), at: Position(x: 0, y: 0)))
+        XCTAssertFalse(grid.isLegal(move: Move(player: .game, val: 1), at: Position(x: 0, y: 0)))
+        XCTAssertFalse(grid.isLegal(move: Move(player: .game, val: 2), at: Position(x: 0, y: 0)))
+        XCTAssertFalse(grid.isLegal(move: Move(player: .game, val: 9), at: Position(x: 0, y: 0)))
     }
 }

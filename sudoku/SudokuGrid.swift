@@ -14,21 +14,17 @@ enum SetType {
     case grid
 }
 
-enum Move {
-    case player(Int)
-    case game(Int)
-    case none
+enum Player: Int {
+    case none = 0
+    case user = 1
+    case game = 2
+}
 
-    var val: Int? {
-        switch self {
-        case .player(let int):
-            return int
-        case .game(let int):
-            return int
-        default:
-            return nil
-        }
-    }
+struct Move {
+    let player: Player
+    let val: Int?
+    
+    static let none = Move(player: .none, val: nil)
 }
 
 struct SudokuGrid {
@@ -85,7 +81,7 @@ struct SudokuGrid {
     }
 
     func isLegal(move: Move, at pos: Position) -> Bool {
-        if case Move.game(_) = self.move(at: pos) {
+        if self.move(at: pos).player == .game {
             return false
         }
 
@@ -93,22 +89,20 @@ struct SudokuGrid {
     }
 
     func isSmart(move: Move, at pos: Position) -> Bool {
-        guard case Move.game(_) = move else {
-            return false
-        }
-
-        return (
-            isSmart(move: move, forNth: pos.y, set: .row) &&
-            isSmart(move: move, forNth: pos.x, set: .column) &&
-            isSmart(move: move, forNth: grid(for: pos), set: .grid)
+        let isSafe = (
+            isSetSafe(move: move, forNth: pos.y, set: .row) &&
+            isSetSafe(move: move, forNth: pos.x, set: .column) &&
+            isSetSafe(move: move, forNth: grid(for: pos), set: .grid)
         )
+
+        return isSafe && isLegal(move: move, at: pos)
     }
 
-    func isSmart(move: Move, forNth nth: Int, set: SetType) -> Bool {
+    func isSetSafe(move: Move, forNth nth: Int, set: SetType) -> Bool {
         guard let val = move.val else {
-            assertionFailure(".none moves are never smart or dumb")
-            return false
+            return true
         }
+
         return !numbersFor(nth: nth, set: set).contains(val)
     }
 }

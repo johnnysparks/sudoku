@@ -13,7 +13,7 @@ class SudokuGame {
     enum Difficulty: Int {
         case hard = 10
         case normal = 20
-        case easy = 30
+        case easy = 60
     }
 
     static func generateGame(difficulty: Difficulty) -> SudokuGrid {
@@ -22,11 +22,11 @@ class SudokuGame {
         while i < difficulty.rawValue {
             let x = Int.random(in: 0..<grid.size)
             let y = Int.random(in: 0..<grid.size)
-            let num = Int.random(in: 0..<grid.size)
+            let num = Int.random(in: 1...grid.size)
             let pos = Position(x: x, y: y)
 
-            if grid.isLegal(move: .game(num), at: pos) {
-                grid.set(move: .game(num), pos: pos)
+            if grid.isSmart(move: Move(player: .game, val: num), at: pos) {
+                grid.set(move: Move(player: .game, val: num), pos: pos)
                 i += 1
             }
         }
