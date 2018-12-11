@@ -27,6 +27,12 @@ struct Move {
     static let none = Move(player: .none, val: nil)
 }
 
+extension Move: Equatable {
+    static func ==(lhs: Move, rhs: Move) -> Bool {
+        return lhs.player == rhs.player && lhs.val == rhs.val
+    }
+}
+
 struct SudokuGrid {
     let size: Int = 9
 
@@ -104,6 +110,14 @@ struct SudokuGrid {
         }
 
         return !numbersFor(nth: nth, set: set).contains(val)
+    }
+
+    mutating func clear(move: Move) {
+        for idx in 0..<size*size {
+            if nums[idx] == move {
+                nums[idx] = .none
+            }
+        }
     }
 }
 
