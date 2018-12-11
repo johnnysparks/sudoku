@@ -4,10 +4,23 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>sudoku-vision.xcscheme_^#shared#^_</key>
+		<key>sudoku.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>F6E2E93921BCF7AC00002069</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6E2E94D21BCF7AD00002069</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
