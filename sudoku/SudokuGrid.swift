@@ -95,13 +95,12 @@ struct SudokuGrid {
     }
 
     func isSmart(move: Move, at pos: Position) -> Bool {
-        let isSafe = (
+        return (
+            isLegal(move: move, at: pos) &&
             isSetSafe(move: move, forNth: pos.y, set: .row) &&
             isSetSafe(move: move, forNth: pos.x, set: .column) &&
             isSetSafe(move: move, forNth: grid(for: pos), set: .grid)
         )
-
-        return isSafe && isLegal(move: move, at: pos)
     }
 
     func isSetSafe(move: Move, forNth nth: Int, set: SetType) -> Bool {
@@ -112,7 +111,7 @@ struct SudokuGrid {
         return !numbersFor(nth: nth, set: set).contains(val)
     }
 
-    mutating func clear(move: Move) {
+    mutating func clear(all move: Move) {
         for idx in 0..<size*size {
             if nums[idx] == move {
                 nums[idx] = .none
@@ -121,3 +120,19 @@ struct SudokuGrid {
     }
 }
 
+extension SudokuGrid: CustomStringConvertible {
+    var description: String {
+        var out = ""
+        for y in 0..<size {
+            for x in 0..<size {
+                if let n = number(at: Position(x: x, y: y)) {
+                    out += "\(n)"
+                } else {
+                    out += "."
+                }
+            }
+            out += "\n"
+        }
+        return out
+    }
+}

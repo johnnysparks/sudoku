@@ -21,4 +21,8 @@ class SudokuGameTests: XCTestCase {
         XCTAssertEqual(hard.compactMap({ $0 }).count, SudokuGame.Difficulty.hard.rawValue)
     }
 
+    func testSolvedGame() {
+        let grid = SudokuGame.generateSolvedGame(difficulty: .easy).nums.map { $0.val }
+        XCTAssertEqual(grid.compactMap({ $0 }).count, grid.count)
+    }
 }

@@ -45,20 +45,38 @@ class SudokuGame {
 
         var grid = SudokuGrid()
         var val = 1
+        var valFails = 0
         while val <= grid.size {
             var row = 0
-            while row < grid.size {
-                var col = Int.random(in: 0..<grid.size)
-                let firstCol = col
+            var rowFails = 0
+            var cols = Array(0..<grid.size).shuffled()
+            while !cols.isEmpty {
+                let col = cols.popLast()!
                 let pos = Position(x: col, y: row)
-                if grid.isSmart(move: Move(player: .game, val: val), at: pos) {
-                    grid.set(move: Move(player: .game, val: val), pos: pos)
+                let move = Move(player: .game, val: val)
+                if grid.isSmart(move: move, at: pos) {
+                    grid.set(move: move, pos: pos)
                     row += 1
                 } else {
-
+                    cols.insert(col, at: 0)
+                    rowFails += 1
+                    if rowFails > 50 {
+                        grid.clear(all: move)
+                        rowFails = 0
+                        row = 0
+                        cols = Array(0..<grid.size).shuffled()
+                        valFails += 1
+                        if valFails > 50 {
+                            val -= 1
+                            grid.clear(all: Move(player: .game, val: val))
+                            valFails = 0
+                        }
+                    }
                 }
             }
+            val += 1
         }
 
+        return grid
     }
 }
