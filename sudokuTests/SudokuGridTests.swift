@@ -231,4 +231,25 @@ class SudokuGridTests: XCTestCase {
         XCTAssertFalse(grid.isLegal(move: Move(player: .game, val: 2), at: Position(x: 0, y: 0)))
         XCTAssertFalse(grid.isLegal(move: Move(player: .game, val: 9), at: Position(x: 0, y: 0)))
     }
+
+
+    func testRemoveRandom() {
+        var grid = SudokuGame.generateSolvedGame()
+        grid.removeRandom(player: .game)
+        XCTAssertEqual(grid.nums.filter({ $0 != .none }).count, grid.size * grid.size - 1)
+        grid.removeRandom(player: .game)
+        XCTAssertEqual(grid.nums.filter({ $0 != .none }).count, grid.size * grid.size - 2)
+        grid.removeRandom(player: .game)
+        XCTAssertEqual(grid.nums.filter({ $0 != .none }).count, grid.size * grid.size - 3)
+        grid.removeRandom(player: .game)
+        XCTAssertEqual(grid.nums.filter({ $0 != .none }).count, grid.size * grid.size - 4)
+        grid.removeRandom(player: .game)
+        XCTAssertEqual(grid.nums.filter({ $0 != .none }).count, grid.size * grid.size - 5)
+
+        for _ in 0..<grid.size {
+            grid.removeRandom(player: .game)
+        }
+        XCTAssertEqual(grid.nums.filter({ $0 != .none }).count,
+                       grid.size * grid.size - (5 + grid.size))
+    }
 }

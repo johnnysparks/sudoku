@@ -17,32 +17,15 @@ class SudokuGame {
     }
 
     static func generateGame(difficulty: Difficulty) -> SudokuGrid {
-        var grid = SudokuGrid()
-        var i = 0
-        while i < difficulty.rawValue {
-            let x = Int.random(in: 0..<grid.size)
-            let y = Int.random(in: 0..<grid.size)
-            let num = Int.random(in: 1...grid.size)
-            let pos = Position(x: x, y: y)
-
-            if grid.isSmart(move: Move(player: .game, val: num), at: pos) {
-                grid.set(move: Move(player: .game, val: num), pos: pos)
-                i += 1
-            }
+        var grid = generateSolvedGame()
+        let removeCount = (grid.size * grid.size) - difficulty.rawValue
+        for _ in 0..<removeCount {
+            grid.removeRandom(player: .game)
         }
-
-
-
         return grid
     }
 
-    static func generateSolvedGame(difficulty: Difficulty) -> SudokuGrid {
-        // TODO - pickup here
-        // strategy
-        // go through and randomly select a position in each row
-        // starting one number at a time
-        // if there's an unsolvable postion, (reset the number)?
-
+    static func generateSolvedGame() -> SudokuGrid {
         var grid = SudokuGrid()
         var val = 1
         var valFails = 0

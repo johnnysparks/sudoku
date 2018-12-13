@@ -118,6 +118,28 @@ struct SudokuGrid {
             }
         }
     }
+
+    @discardableResult
+    mutating func removeRandom(player: Player) -> Move? {
+        let max = nums.filter({ $0 != .none }).count
+        guard max > 0 else {
+            return nil
+        }
+
+        let target = Int.random(in: 0..<max)
+        var current = 0
+        for idx in 0..<nums.count {
+            let move = nums[idx]
+            if move != .none {
+                if current == target {
+                    nums[idx] = .none
+                    return move
+                }
+                current += 1
+            }
+        }
+        return nil
+    }
 }
 
 extension SudokuGrid: CustomStringConvertible {
