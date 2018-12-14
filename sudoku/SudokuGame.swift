@@ -14,6 +14,7 @@ class SudokuGame {
         case hard = 10
         case normal = 20
         case easy = 30
+        case superEasy = 80
     }
 
     static func generateGame(difficulty: Difficulty) -> SudokuGrid {

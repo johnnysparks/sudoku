@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SetType {
+enum SetType: CaseIterable {
     case row
     case column
     case grid
@@ -139,6 +139,20 @@ struct SudokuGrid {
             }
         }
         return nil
+    }
+
+    func isComplete() -> Bool {
+        let allNums = Set<Int>(Array(1...size))
+        for set in SetType.allCases {
+            for nth in 0..<size {
+                let nums = Set(numbersFor(nth: nth, set: set))
+                if nums != allNums {
+                    return false
+                }
+            }
+        }
+
+        return true
     }
 }
 

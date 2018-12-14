@@ -41,7 +41,7 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        sudokuGrid = SudokuGame.generateGame(difficulty: .easy)
+        sudokuGrid = SudokuGame.generateGame(difficulty: .superEasy)
         update()
     }
 

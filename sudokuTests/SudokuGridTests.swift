@@ -252,4 +252,22 @@ class SudokuGridTests: XCTestCase {
         XCTAssertEqual(grid.nums.filter({ $0 != .none }).count,
                        grid.size * grid.size - (5 + grid.size))
     }
+
+
+    func testIsComplete() {
+        var grid = SudokuGame.generateSolvedGame()
+        XCTAssert(grid.isComplete())
+        grid.removeRandom(player: .game)
+
+        for col in 0..<grid.size {
+            let pos = Position(x: col, y: 1)
+            grid.set(move: Move(player: .game, val: 1), pos: pos)
+        }
+        XCTAssertFalse(grid.isComplete())
+
+        grid = SudokuGame.generateSolvedGame()
+        XCTAssert(grid.isComplete())
+        grid.removeRandom(player: .game)
+        XCTAssertFalse(grid.isComplete())
+    }
 }
