@@ -17,6 +17,20 @@ class ViewController: UIViewController {
     func update() {
         pickerView.sudokuGrid = self.sudokuGrid
         sudokuGridView.sudokuGrid = self.sudokuGrid
+
+        if self.sudokuGrid.isComplete() {
+            let alert = UIAlertController(title: "You win!", message: "Play again?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Play", style: .default, handler: { _ in
+                self.newGame()
+            }))
+            alert.addAction(UIAlertAction(title: "Just look", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func newGame() {
+        sudokuGrid = SudokuGame.generateGame(difficulty: .superEasy)
+        update()
     }
 
     override func viewDidLoad() {
@@ -41,8 +55,7 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        sudokuGrid = SudokuGame.generateGame(difficulty: .superEasy)
-        update()
+        newGame()
     }
 
     override func viewWillLayoutSubviews() {
